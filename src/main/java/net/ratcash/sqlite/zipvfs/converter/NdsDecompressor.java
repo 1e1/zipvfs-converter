@@ -50,13 +50,10 @@ public class NdsDecompressor {
 		config.put(OPTION.filePath, args[0]);
 		config.put(OPTION.cipherName, "RC4");
 		config.put(OPTION.startKey, "00000000000000000000000000000000");
-		
-		switch (args.length) {
-		case 3:
-			config.put(OPTION.startKey, args[2]);
-		case 2: 
-			config.put(OPTION.cipherName, args[1]);
-		}
+
+        if (args.length > 1) config.put(OPTION.cipherName, args[1]);
+        if (args.length > 2) config.put(OPTION.startKey, args[2]);
+        
 		
 		KeyIterator keyIterator; 
 		{
@@ -131,8 +128,10 @@ public class NdsDecompressor {
 			}
 
 			this.info(zipvfs.toString(), dumpFile);
-			
-			this.convert(zipvfs, convertedFile);
+
+            if (zipvfs.isReadable()) {
+                this.convert(zipvfs, convertedFile);
+            }
 			
 			try {
 				List<String> tableList = this.getTables(convertedFile);
