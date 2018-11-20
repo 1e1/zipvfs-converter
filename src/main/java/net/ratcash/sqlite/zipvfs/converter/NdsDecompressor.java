@@ -129,9 +129,7 @@ public class NdsDecompressor {
 
 			this.info(zipvfs.toString(), dumpFile);
 
-            if (zipvfs.isReadable()) {
-                this.convert(zipvfs, convertedFile);
-            }
+            this.convert(zipvfs, convertedFile);
 			
 			try {
 				List<String> tableList = this.getTables(convertedFile);

@@ -34,6 +34,10 @@ public class CipherRead {
 		this.canLoop = false;
 	}
 	
+	public boolean canLoop() {
+	    return this.canLoop && this.keyIterator.hasNext();
+	}
+	
 	public Cipher getCipher() {
 		return this.cipher;
 	}
@@ -77,7 +81,7 @@ public class CipherRead {
 	public boolean testAll() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		boolean found = this.testFirst();
 			
-		while (this.canLoop && !found) {
+		while (this.canLoop() && !found) {
 			found = this.testNext();
 		}
 		
