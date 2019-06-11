@@ -7,12 +7,18 @@ This utility was born as a result of discussions here: http://www.seatcupra.net/
 
 Pull requests are welcome.
 
-##usage
+## usage
 
 1. build using java and maven, i.e. `mvn package`
 2. Execute conversion using `java -jar [path_to/repo]/target/zipvfs-converter-1.0-SNAPSHOT.jar [yourNDSFileHere]`
 
-##read
+Or for a brute-force decryption `java -jar ./sqlite-2.0-jar-with-dependencies.jar [yourNDSFileHere] [algoName] [firstKey] [alphabet]` 
+- yourNDSFileHere: path to the NDS file
+- algoName: dump | or valid provider name for `javax.crypto.Cipher.getInstance` (RC4 | ARCFOUR | ...)
+- firstKey: <string>
+- alphabet: constant in `net.euler.cipher.KeySet`
+
+## read
 
 . Check using `sqlite3 [yourNDSFileHere].sqlite .dump > output.sql ; cat output.sql`
 
